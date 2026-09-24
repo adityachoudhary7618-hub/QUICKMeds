@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickMeds — Medicines Delivered in 5 Minutes</title>
+  <meta name="description" content="Genuine medicines from verified nearby pharmacies, delivered to your door in minutes.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+<header>
+  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <span class="logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10.4" y="3" width="3.2" height="18" rx="1.6" fill="currentColor"/>
+        <rect x="3" y="10.4" width="18" height="3.2" rx="1.6" fill="currentColor"/>
+      </svg>
+    </span>
+    QUICK<span>Meds</span>
+  </div>
+
+  <div class="location">
+    <svg class="icon-sm" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+    Deliver to Muradnagar <b>▾</b>
+  </div>
+
+  <div class="search">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search medicine, e.g. Paracetamol..."
+      aria-label="Search medicines"
+    >
+  </div>
+
+  <div class="cart-btn" onclick="toggleCart()" role="button" tabindex="0" aria-label="Open cart">
+    <svg class="icon-sm" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="currentColor"/><circle cx="17" cy="21" r="1.4" fill="currentColor"/></svg>
+    Cart <span id="cart-count">0</span>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<section class="hero">
+
+  <div class="hero-copy">
+    <span class="eyebrow">Trusted by 50,000+ families nearby</span>
+    <h1>Medicines delivered<br><span>in 5 minutes</span></h1>
+    <p>Genuine medicines from verified pharmacies near you — packed with care and at your door before the kettle boils.</p>
+
+    <div class="hero-actions">
+      <button class="sos" onclick="openSOS()">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7v6c0 5.2 3.8 9 10 11 6.2-2 10-5.8 10-11V7l-10-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+        Emergency SOS
+      </button>
+      <a class="hero-secondary" href="#products">Browse medicines ↓</a>
+    </div>
+
+    <div class="trust-row">
+      <span><svg class="icon-xs" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> 100% Genuine</span>
+      <span><svg class="icon-xs" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> 24×7 Available</span>
+      <span><svg class="icon-xs" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8"/></svg> Secure Payments</span>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 340 340" class="hero-svg">
+      <circle cx="170" cy="170" r="150" class="ring ring-1"/>
+      <circle cx="170" cy="170" r="118" class="ring ring-2"/>
+
+      <g class="float-slow">
+        <rect x="118" y="58" width="34" height="90" rx="17" class="capsule capsule-a"/>
+        <path d="M118 75a17 17 0 0 1 34 0v11h-34Z" class="capsule-cap"/>
+      </g>
+
+      <g class="float-med">
+        <circle cx="252" cy="120" r="30" class="pill-round"/>
+        <path d="M240 120h24M252 108v24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      </g>
+
+      <g class="float-fast">
+        <rect x="70" y="210" width="70" height="50" rx="10" class="bottle-body"/>
+        <rect x="90" y="196" width="30" height="18" rx="4" class="bottle-cap"/>
+        <path d="M83 232h44M83 244h30" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+      </g>
+
+      <g class="float-med" style="animation-delay:.6s">
+        <path d="M215 235c22-4 40 10 40 30 0 22-20 34-40 30-16-3-28-16-28-32l14-4c0 10 6 18 16 20 12 2 24-6 24-16 0-12-11-20-22-18l-4-10Z" class="cross-shape"/>
+        <path d="M235 250v18M226 259h18" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      </g>
+
+      <path class="pulse-line" d="M40 300 H120 L135 270 L155 320 L170 285 L185 300 H300" fill="none"/>
+    </svg>
+  </div>
+</section>
+
+<!-- =========================================================
+     STATS STRIP
+     ========================================================= -->
+<section class="stats">
+  <div class="stat"><strong>5 min</strong><span>Avg. delivery time</span></div>
+  <div class="stat"><strong>500+</strong><span>Medicines in stock</span></div>
+  <div class="stat"><strong>3</strong><span>Verified partner pharmacies</span></div>
+  <div class="stat"><strong>24×7</strong><span>Always open</span></div>
+</section>
+
+<!-- =========================================================
+     CATEGORIES
+     ========================================================= -->
+<div class="categories">
+  <div class="cat active" onclick="filterCategory('All', this)">💊 All</div>
+  <div class="cat" onclick="filterCategory('Fever', this)">🌡️ Fever</div>
+  <div class="cat" onclick="filterCategory('Cold', this)">🤧 Cold</div>
+  <div class="cat" onclick="filterCategory('Pain', this)">⚡ Pain</div>
+  <div class="cat" onclick="filterCategory('Diabetes', this)">🩸 Diabetes</div>
+  <div class="cat" onclick="filterCategory('Vitamin', this)">🍊 Vitamins</div>
+  <div class="cat" onclick="filterCategory('First Aid', this)">➕ First Aid</div>
+</div>
+
+<h2 class="section-title" id="products">Popular Medicines</h2>
+
+<div class="products" id="product-grid"></div>
+
+<!-- =========================================================
+     WHY QUICKMEDS
+     ========================================================= -->
+<section class="why">
+  <h2 class="section-title">Why QuickMeds</h2>
+  <div class="why-grid">
+
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Lightning-fast delivery</h4>
+      <p>Partner pharmacies near you mean most orders arrive in 5–10 minutes.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6.5v5c0 5.5 3.6 9.9 8 11 4.4-1.1 8-5.5 8-11v-5L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Verified &amp; genuine</h4>
+      <p>Every store is licensed and every medicine is sourced and checked before it reaches you.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c4.4-2.4 8-6.6 8-11.5A5.5 5.5 0 0 0 12 6a5.5 5.5 0 0 0-8 3.5C4 14.4 7.6 18.6 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Real pharmacist support</h4>
+      <p>Have a question about dosage or a substitute? Chat with a licensed pharmacist, free.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M7 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Easy, secure payments</h4>
+      <p>UPI, cards or cash on delivery — pay however suits you, with bank-grade security.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     CART SIDEBAR
+     ========================================================= -->
+<div id="cart-overlay" onclick="toggleCart()"></div>
+
+<div id="cart-sidebar">
+
+  <div class="cart-head">
+    <h3><svg class="icon-sm" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="currentColor"/><circle cx="17" cy="21" r="1.4" fill="currentColor"/></svg> Your Cart</h3>
+    <span onclick="toggleCart()" class="close" aria-label="Close cart">✕</span>
+  </div>
+
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+
+    <div class="bill">
+      <p>Subtotal <span>₹<span id="subtotal">0</span></span></p>
+      <p>Delivery <span id="delivery-charge">FREE</span></p>
+      <hr>
+      <h3>Total <span>₹<span id="total">0</span></span></h3>
+    </div>
+
+    <button onclick="openPayment()">Proceed to Payment</button>
+
+  </div>
+</div>
+
+<!-- =========================================================
+     PAYMENT MODAL
+     ========================================================= -->
+<div id="payment-modal" class="modal hidden">
+
+  <div class="payment-box">
+
+    <div class="payment-head">
+      <h2>Payment Method</h2>
+      <span onclick="closePayment()">✕</span>
+    </div>
+
+    <p class="pay-total">
+      Amount Payable <b>₹<span id="payment-total">0</span></b>
+    </p>
+
+    <div class="payment-options">
+
+      <label class="payment-option">
+        <input type="radio" name="payment" value="UPI" checked>
+        <span class="pay-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <div>
+          <b>UPI</b>
+          <small>Google Pay · PhonePe · Paytm</small>
+        </div>
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="payment" value="Card">
+        <span class="pay-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <div>
+          <b>Credit / Debit Card</b>
+          <small>Visa · Mastercard · RuPay</small>
+        </div>
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="payment" value="COD">
+        <span class="pay-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v8M9 10.5c0-1.4 1.3-2.5 3-2.5s3 .9 3 2c0 3-6 1.5-6 4.5 0 1.1 1.3 2 3 2s3-1.1 3-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <div>
+          <b>Cash on Delivery</b>
+          <small>Pay when your medicine arrives</small>
+        </div>
+      </label>
+
+    </div>
+
+    <div id="upi-section" class="payment-details">
+      <label>UPI ID</label>
+      <input type="text" id="upi" placeholder="example@upi">
+    </div>
+
+    <div id="card-section" class="payment-details hidden">
+      <label>Card Number</label>
+      <input type="text" id="cardNumber" maxlength="16" placeholder="1234 5678 9012 3456">
+
+      <div class="card-row">
+        <div>
+          <label>Expiry</label>
+          <input type="text" placeholder="MM/YY">
+        </div>
+        <div>
+          <label>CVV</label>
+          <input type="password" maxlength="3" placeholder="***">
+        </div>
+      </div>
+    </div>
+
+    <button class="pay-btn" onclick="confirmPayment()">
+      Pay Now ₹<span id="pay-button-total">0</span>
+    </button>
+
+    <p class="pay-secure"><svg class="icon-xs" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8"/></svg> Encrypted &amp; secure checkout</p>
+
+  </div>
+</div>
+
+<!-- =========================================================
+     ORDER TRACKING
+     ========================================================= -->
+<div id="tracker" class="hidden">
+
+  <h2>Order Tracking</h2>
+  <p class="order-id-row">Order ID <b id="order-id">QM1234</b></p>
+
+  <div class="steps">
+    <div class="progress-line"><span id="progress-fill"></span></div>
+
+    <div class="step active" id="s1"><span class="step-dot">✓</span>Order Placed</div>
+    <div class="step" id="s2"><span class="step-dot">📦</span>Packed</div>
+    <div class="step" id="s3"><span class="step-dot">🛵</span>Out for Delivery</div>
+    <div class="step" id="s4"><span class="step-dot">🏠</span>Delivered</div>
+  </div>
+</div>
+
+<!-- =========================================================
+     SOS MODAL
+     ========================================================= -->
+<div id="sos-modal" class="modal hidden">
+  <div class="sos-box">
+    <div class="payment-head">
+      <h2>🚨 Emergency SOS</h2>
+      <span onclick="closeSOS()">✕</span>
+    </div>
+    <p>If this is a medical emergency, please contact local emergency services or go to the nearest hospital immediately — don't wait on a delivery.</p>
+    <a class="sos-call" href="tel:112">📞 Call Emergency Services — 112</a>
+    <button class="sos-close-btn" onclick="closeSOS()">Close</button>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div id="toast-container"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark small" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="10.4" y="3" width="3.2" height="18" rx="1.6" fill="currentColor"/><rect x="3" y="10.4" width="18" height="3.2" rx="1.6" fill="currentColor"/></svg>
+      </span>
+      QUICK<span>Meds</span>
+    </div>
+    <p class="footer-tag">Genuine medicines, from nearby pharmacies, in minutes.</p>
+    <p class="footer-credit">Made by Aditya, Anubhav Tyagi &amp; Dhruv Rastogi · KIET · © 2026</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
